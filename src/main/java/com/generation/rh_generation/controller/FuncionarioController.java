@@ -1,11 +1,14 @@
 package com.generation.rh_generation.controller;
 
+import com.generation.rh_generation.model.Funcionario;
 import com.generation.rh_generation.repository.CargoRepository;
 import com.generation.rh_generation.repository.FuncionarioRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/funcionarios")
@@ -17,4 +20,16 @@ public class FuncionarioController {
 
     @Autowired
     CargoRepository cargoRepository;
+
+    @PutMapping
+    public ResponseEntity<Funcionario> updateFuncionario(@Valid @RequestBody Funcionario funcionario) {
+        if (funcionarioRepository.existsById(funcionario.getId())) {
+            if (cargoRepository.existsById(funcionario.getCargo().getId()))
+                return ResponseEntity.status(HttpStatus.OK).body(funcionarioRepository.save(funcionario));
+
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Funcionário não existente!", null);
+
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
