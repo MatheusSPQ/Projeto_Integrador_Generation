@@ -23,7 +23,6 @@ public class Cargo {
     @NotNull
     private Double salarioBase;
 
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "cargo",cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties
     private List<Funcionario> funcionario;
