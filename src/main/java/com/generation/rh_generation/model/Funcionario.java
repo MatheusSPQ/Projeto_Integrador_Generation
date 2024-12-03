@@ -46,7 +46,7 @@ public class Funcionario {
     private String email;
 
     @ManyToOne
-    @JsonIgnoreProperties("Funcionario")
+    @JsonIgnoreProperties("funcionario")
     private Cargo cargo;
 
 
