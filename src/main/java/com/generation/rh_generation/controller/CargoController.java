@@ -16,9 +16,6 @@ public class CargoController {
     @Autowired
     private CargoRepository cargoRepository;
 
-    @Autowired
-    private FuncionarioRepository funcionarioRepository;
-
 
 
 
