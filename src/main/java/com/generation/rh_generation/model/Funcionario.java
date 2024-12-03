@@ -15,7 +15,7 @@ import java.util.Date;
 public class Funcionario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private long id;
 
     @NotBlank
@@ -46,7 +46,7 @@ public class Funcionario {
     private String email;
 
     @ManyToOne
-    @JsonIgnoreProperties("funcionario")
+    @JsonIgnoreProperties("Funcionario")
     private Cargo cargo;
 
 
