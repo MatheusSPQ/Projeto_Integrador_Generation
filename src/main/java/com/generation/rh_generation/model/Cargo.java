@@ -13,7 +13,7 @@ import java.util.List;
 public class Cargo {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank
@@ -22,7 +22,6 @@ public class Cargo {
 
     @NotNull
     private Double salarioBase;
-
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "cargo",cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties
