@@ -44,10 +44,6 @@ public class Funcionario {
     @Email
     private String email;
 
-    @ManyToOne
-    @JsonIgnoreProperties("funcionario")
-    private Cargo cargo;
-
 
     public long getId() {
         return id;
@@ -117,12 +113,4 @@ public class Funcionario {
         this.email = email;
     }
 
-    public Cargo getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(Cargo cargo) {
-
-        this.cargo = cargo;
-    }
 }
