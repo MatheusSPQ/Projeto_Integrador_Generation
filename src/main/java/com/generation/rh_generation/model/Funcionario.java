@@ -78,7 +78,9 @@ public class Funcionario {
         this.dataNascimento = dataNascimento;
     }
 
-    public Date getDataAdmissao() {
+
+    public  Date getDataAdmissao() {
+
         return dataAdmissao;
     }
 
