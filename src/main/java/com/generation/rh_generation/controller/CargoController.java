@@ -5,7 +5,9 @@ import com.generation.rh_generation.model.Cargo;
 import com.generation.rh_generation.model.Funcionario;
 import com.generation.rh_generation.repository.CargoRepository;
 import com.generation.rh_generation.repository.FuncionarioRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
@@ -20,11 +22,11 @@ public class CargoController {
     @Autowired
     private CargoRepository cargoRepository;
 
-    @GetMapping
-    public ResponseEntity<List<Cargo>> getAll(){
-        return ResponseEntity.ok(cargoRepository.findAll());
+    @PostMapping
+    public ResponseEntity<Cargo> post(@Valid @RequestBody Cargo cargo){
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(cargoRepository.save(cargo));
     }
-
 
     @GetMapping("/{cargo}")
     public ResponseEntity<List<Cargo>> getByNome(@PathVariable String cargo){
