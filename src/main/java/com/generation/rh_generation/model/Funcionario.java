@@ -15,7 +15,7 @@ import java.util.Date;
 public class Funcionario {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank
@@ -78,7 +78,9 @@ public class Funcionario {
         this.dataNascimento = dataNascimento;
     }
 
+
     public  Date getDataAdmissao() {
+
         return dataAdmissao;
     }
 
@@ -100,13 +102,5 @@ public class Funcionario {
 
     public void setEmail(@NotBlank @Email String email) {
         this.email = email;
-    }
-
-    public Cargo getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(Cargo cargo) {
-        this.cargo = cargo;
     }
 }
