@@ -18,6 +18,7 @@ public class CargoController {
     @Autowired
     private CargoRepository cargoRepository;
 
+
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
@@ -26,6 +27,8 @@ public class CargoController {
         return cargoRepository.findById(cargo.getId())
                 .map(resposta -> ResponseEntity.status(HttpStatus.CREATED).body(cargoRepository.save(cargo)))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+
+
 
     }
 
