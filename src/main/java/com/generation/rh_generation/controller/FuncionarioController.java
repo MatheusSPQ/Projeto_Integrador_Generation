@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 
-
 @RestController
 @RequestMapping("/funcionarios")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -35,14 +34,14 @@ public class FuncionarioController {
                 .body(funcionarioRepository.save(funcionario));
     }
 
-    
+
 
 	@GetMapping
 	public ResponseEntity<List<Funcionario>> getlALL(){
 
         return ResponseEntity.ok(funcionarioRepository.findAll());
 	}
-	
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteFuncionario(@PathVariable Long id) {
@@ -53,7 +52,7 @@ public class FuncionarioController {
     	} else {
     		return ResponseEntity.status(404).body("Funcionário não encontrado.");
     	}
-    	
+
     }
 
 
@@ -76,6 +75,5 @@ public class FuncionarioController {
         }
         return ResponseEntity.ok(funcionarios);
     }
-
 
 }
