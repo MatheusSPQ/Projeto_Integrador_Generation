@@ -10,5 +10,5 @@ import java.util.List;
 
 @Repository
 public interface FuncionarioRepository  extends JpaRepository<Funcionario, Long> {
-
+    public List<Funcionario> findByCpf(@Param("cpf") String cpf);
 }
