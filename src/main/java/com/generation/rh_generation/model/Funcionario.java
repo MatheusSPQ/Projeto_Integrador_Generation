@@ -27,12 +27,12 @@ public class Funcionario {
     @Column(nullable = false, unique = true)
     private String cpf;
 
-    @NotBlank
+
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
     private Date dataNascimento;
 
-    @NotBlank
+
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
     private Date dataAdmissao;
@@ -44,10 +44,6 @@ public class Funcionario {
     @NotBlank
     @Email
     private String email;
-
-    @ManyToOne
-    @JsonIgnoreProperties("Funcionario")
-    private Cargo cargo;
 
 
     public long getId() {
@@ -74,19 +70,19 @@ public class Funcionario {
         this.cpf = cpf;
     }
 
-    public @NotBlank Date getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(@NotBlank Date dataNascimento) {
+    public void setDataNascimento( Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
-    public @NotBlank Date getDataAdmissao() {
+    public  Date getDataAdmissao() {
         return dataAdmissao;
     }
 
-    public void setDataAdmissao(@NotBlank Date dataAdmissao) {
+    public void setDataAdmissao( Date dataAdmissao) {
         this.dataAdmissao = dataAdmissao;
     }
 
