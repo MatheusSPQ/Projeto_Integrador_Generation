@@ -39,14 +39,28 @@ public class FuncionarioController {
                 .body(funcionarioRepository.save(funcionario));
     }
 
-    
 
 	@GetMapping
 	public ResponseEntity<List<Funcionario>> getlALL(){
 
         return ResponseEntity.ok(funcionarioRepository.findAll());
 	}
-	
+
+    @GetMapping("id/{id}")
+    public ResponseEntity<Funcionario> getById(@PathVariable Long id){
+        Optional<Funcionario> funcionario = funcionarioRepository.findById(id);
+        return funcionario.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/cpf/{cpf}")
+    public ResponseEntity<List<Funcionario>> getByCpf(@PathVariable String cpf){
+        List<Funcionario> funcionarios = funcionarioRepository.findByCpf(cpf);
+        if(funcionarios.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(funcionarios);
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteFuncionario(@PathVariable Long id) {
@@ -60,7 +74,6 @@ public class FuncionarioController {
     	
     }
 
-
     @PutMapping
     public ResponseEntity<Funcionario> updateFuncionario(@Valid @RequestBody Funcionario funcionario) {
         if (funcionarioRepository.existsById(funcionario.getId())) {
@@ -73,14 +86,7 @@ public class FuncionarioController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/cpf/{cpf}")
-    public ResponseEntity<List<Funcionario>> getByCpf(@PathVariable String cpf){
-        List<Funcionario> funcionarios = funcionarioRepository.findByCpf(cpf);
-        if(funcionarios.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(funcionarios);
-    }
+
 
 
 }

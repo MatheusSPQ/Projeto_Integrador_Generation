@@ -25,6 +25,8 @@ public class CargoController {
     private CargoRepository cargoRepository;
 
 
+
+
     @PostMapping
     public ResponseEntity<Cargo> post(@Valid @RequestBody Cargo cargo){
         return ResponseEntity.status(HttpStatus.CREATED)
