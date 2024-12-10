@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CPF;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -30,11 +31,11 @@ public class Funcionario {
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Date dataAdmissao;
+    private LocalDate dataAdmissao;
 
     @NotBlank
     @Size(min = 11, max = 11)
@@ -78,21 +79,21 @@ public class Funcionario {
         this.cpf = cpf;
     }
 
-    public  Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
 
         return dataNascimento;
     }
 
-    public void setDataNascimento( Date dataNascimento) {
+    public void setDataNascimento( LocalDate dataNascimento) {
 
         this.dataNascimento = dataNascimento;
     }
 
-    public Date getDataAdmissao() {
+    public LocalDate getDataAdmissao() {
         return dataAdmissao;
     }
 
-    public void setDataAdmissao( Date dataAdmissao) {
+    public void setDataAdmissao( LocalDate dataAdmissao) {
 
         this.dataAdmissao = dataAdmissao;
     }
