@@ -1,5 +1,6 @@
 package com.generation.rh_generation.controller;
 import com.generation.rh_generation.model.Funcionario;
+import com.generation.rh_generation.repository.CargoRepository;
 import com.generation.rh_generation.repository.FuncionarioRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.web.server.ResponseStatusException;
+
 
 
 
@@ -26,6 +29,8 @@ public class FuncionarioController {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
+    @Autowired
+    private CargoRepository cargoRepository;
 
 
     @PostMapping
@@ -33,7 +38,6 @@ public class FuncionarioController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(funcionarioRepository.save(funcionario));
     }
-
 
 
 	@GetMapping
@@ -58,7 +62,6 @@ public class FuncionarioController {
         return ResponseEntity.ok(funcionarios);
     }
 
-
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteFuncionario(@PathVariable Long id) {
     	Optional<Funcionario> funcionarioOptional = funcionarioRepository.findById(id);
@@ -68,19 +71,22 @@ public class FuncionarioController {
     	} else {
     		return ResponseEntity.status(404).body("Funcionário não encontrado.");
     	}
-
+    	
     }
-
 
     @PutMapping
     public ResponseEntity<Funcionario> updateFuncionario(@Valid @RequestBody Funcionario funcionario) {
         if (funcionarioRepository.existsById(funcionario.getId())) {
-            return ResponseEntity.status(HttpStatus.OK).body(funcionarioRepository.save(funcionario));
-        }else{
-            return ResponseEntity.notFound().build();
+            if (cargoRepository.existsById(funcionario.getCargo().getId()))
+                return ResponseEntity.status(HttpStatus.OK).body(funcionarioRepository.save(funcionario));
+
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Funcionário não existente!", null);
+
         }
-
-
+        return ResponseEntity.notFound().build();
     }
+
+
+
 
 }
